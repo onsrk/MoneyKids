@@ -1,0 +1,212 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+
+/* WELCOME */
+.welcome-banner {
+    background: linear-gradient(135deg, #F59E0B, #FBBF24);
+    border-radius: 16px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.welcome-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: #78350F;
+}
+
+.welcome-sub {
+    font-size: 13px;
+    color: #92400E;
+    margin-top: 4px;
+}
+
+/* SOLDE CARD */
+.solde-card {
+    background: linear-gradient(135deg, #1D4ED8, #3B82F6);
+    border-radius: 20px;
+    padding: 28px;
+    color: white;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.solde-label {
+    font-size: 12px;
+    opacity: 0.8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.solde-amount {
+    font-size: 48px;
+    font-weight: 900;
+    letter-spacing: -2px;
+    line-height: 1;
+}
+
+.solde-currency {
+    font-size: 24px;
+    opacity: 0.8;
+}
+
+.solde-pocket {
+    font-size: 13px;
+    opacity: 0.75;
+    margin-top: 10px;
+}
+
+/* SECTION TITLE */
+.section-title {
+    font-size: 14px;
+    font-weight: 800;
+    color: #1e293b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+}
+
+/* AMOUNTS */
+.amount-credit {
+    color: #16A34A;
+    font-weight: 800;
+}
+
+.amount-debit {
+    color: #DC2626;
+    font-weight: 800;
+}
+/* SOLDE MINI */
+.solde-mini {
+    background: #EFF6FF;
+    border: 2px solid #BFDBFE;
+    border-radius: 12px;
+    padding: 12px 20px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 20px;
+}
+
+.solde-mini span {
+    color: #2563EB;
+    font-size: 18px;
+    font-weight: 900;
+}
+
+/* FORM CARD */
+.form-card {
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    border: 1px solid #e2e8f0;
+    max-width: 600px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid #e2e8f0;
+}
+
+/* BACK LINK */
+.back-link {
+    display: inline-block;
+    color: #2563EB;
+    font-weight: 700;
+    font-size: 14px;
+    text-decoration: none;
+    margin-bottom: 20px;
+}
+
+.back-link:hover { text-decoration: underline; }
+/* OBJECTIFS */
+.objectifs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.objectif-card {
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    border: 1px solid #e2e8f0;
+}
+
+.objectif-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.objectif-name {
+    font-size: 16px;
+    font-weight: 800;
+    color: #1e293b;
+}
+
+.objectif-amounts {
+    margin-bottom: 12px;
+}
+
+.objectif-actuel {
+    font-size: 20px;
+    font-weight: 900;
+    color: #1e293b;
+}
+
+.objectif-cible {
+    font-size: 14px;
+    color: #64748B;
+}
+
+/* PROGRESS BAR */
+.progress-bar-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.progress-bar-bg {
+    flex: 1;
+    height: 12px;
+    background: #E2E8F0;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    border-radius: 20px;
+    transition: width 0.5s ease;
+}
+
+.progress-percent {
+    font-size: 13px;
+    font-weight: 800;
+    min-width: 40px;
+    text-align: right;
+}
+
+.objectif-restant {
+    font-size: 12px;
+    color: #64748B;
+    margin-bottom: 4px;
+}
+
+.objectif-date {
+    font-size: 12px;
+    color: #94A3B8;
+}

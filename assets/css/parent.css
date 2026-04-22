@@ -1,0 +1,411 @@
+
+/* ── CHILDREN GRID ── */
+.children-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.child-card {
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    border: 1px solid #e2e8f0;
+    transition: transform 0.2s;
+}
+
+.child-card:hover { transform: translateY(-3px); }
+
+.child-card-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 16px;
+}
+
+.child-avatar {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #2563EB, #3B82F6);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 22px;
+    font-weight: 900;
+}
+
+.child-info { flex: 1; }
+
+.child-name {
+    font-size: 16px;
+    font-weight: 800;
+    color: #1e293b;
+}
+
+.child-age {
+    font-size: 12px;
+    color: #64748B;
+    margin-top: 2px;
+}
+
+.child-balance {
+    font-size: 18px;
+    font-weight: 900;
+    color: #2563EB;
+    background: #EFF6FF;
+    padding: 6px 14px;
+    border-radius: 20px;
+}
+
+.child-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 14px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.child-pocket {
+    font-size: 13px;
+    color: #64748B;
+    font-weight: 600;
+}
+.btn-small {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    padding: 7px 14px;
+    border-radius: 8px;
+
+    font-family: 'Nunito', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+
+    cursor: pointer;
+    text-decoration: none;
+
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+
+    border: 1px solid transparent;
+    white-space: nowrap;
+}
+.btn-small:active {
+    transform: scale(0.97);
+}
+
+.btn-small:focus-visible {
+    outline: 3px solid rgba(37, 99, 235, 0.4);
+    outline-offset: 2px;
+}
+
+.btn-small-primary {
+    background-color: #2563EB;
+    color: #ffffff;
+    border-color: #2563EB;
+}
+
+.btn-small-primary:hover {
+    background-color: #1d4ed8;
+    border-color: #1d4ed8;
+}
+.btn-small-secondary {
+    background-color: transparent;
+    color: #2563EB;
+    border: 1px solid #2563EB;
+}
+
+.btn-small-secondary:hover {
+    background-color: #2563EB;
+    color: #ffffff;
+}
+
+.btn-add-child {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    background: white;
+    color: #2563EB;
+    border: 2px dashed #2563EB;
+    border-radius: 16px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 15px;
+    font-weight: 800;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.btn-add-child:hover { background: #EFF6FF; }
+/* ── FORM CARD ── */
+.form-card {
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    border: 1px solid #e2e8f0;
+    max-width: 600px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid #e2e8f0;
+}
+/* ── BACK LINK ── */
+.back-link {
+    display: inline-block;
+    color: #2563EB;
+    font-weight: 700;
+    font-size: 14px;
+    text-decoration: none;
+    margin-bottom: 20px;
+}
+
+.back-link:hover { text-decoration: underline; }
+
+/* ── BALANCE CARD ── */
+.balance-card {
+    background: linear-gradient(135deg, #1D4ED8, #3B82F6);
+    border-radius: 20px;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    margin-bottom: 8px;
+}
+
+.balance-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.balance-avatar {
+    width: 56px;
+    height: 56px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 900;
+    color: white;
+}
+
+.balance-name {
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.balance-age {
+    font-size: 13px;
+    opacity: 0.8;
+    margin-top: 2px;
+}
+
+.balance-right { text-align: right; }
+
+.balance-label {
+    font-size: 12px;
+    opacity: 0.8;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.balance-amount {
+    font-size: 32px;
+    font-weight: 900;
+    letter-spacing: -1px;
+}
+
+.balance-pocket {
+    font-size: 12px;
+    opacity: 0.8;
+    margin-top: 4px;
+}
+/* STATS GRID */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.stat-card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    border-left: 4px solid;
+}
+
+.stat-red { border-left-color: #EF4444; }
+.stat-green { border-left-color: #10B981; }
+.stat-blue { border-left-color: #2563EB; }
+
+.stat-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #64748B;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+}
+
+.stat-value {
+    font-size: 24px;
+    font-weight: 900;
+    color: #1e293b;
+}
+
+/* FILTER FORM */
+.filter-form {
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* AMOUNTS */
+.amount-credit {
+    color: #16A34A;
+    font-weight: 800;
+}
+
+.amount-debit {
+    color: #DC2626;
+    font-weight: 800;
+}
+.btn-small-danger {
+    background-color: #EF4444;
+    color: #ffffff;
+    border-color: #EF4444;
+}
+
+.btn-small-danger:hover {
+    background-color: #dc2626;
+    border-color: #dc2626;
+}
+.children-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: #f3f6fb;
+    border-radius: 15px;
+    overflow: hidden;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* HEADER */
+.children-table thead {
+    background: #e9edf5;
+}
+
+.children-table th {
+    text-align: left;
+    padding: 15px;
+    font-size: 14px;
+    color: #5a6b8a;
+    font-weight: 600;
+}
+
+/* ROWS */
+.children-table td {
+    padding: 15px;
+    font-size: 15px;
+    border-top: 1px solid #e0e6f0;
+}
+
+/* HOVER EFFECT */
+.children-table tbody tr:hover {
+    background: #eef3fb;
+}
+
+/* CHILD CELL */
+.child-mini {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.child-avatar {
+    width: 35px;
+    height: 35px;
+    background: #4f7cff;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.child-name {
+    font-weight: 500;
+    color: #2c3e50;
+}
+
+/* BALANCE */
+.balance {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+/* ACTION BUTTONS */
+.actions {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.btn-small {
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-size: 12px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* BUTTON COLORS */
+.btn-small-primary {
+    background: #e3edff;
+    color: #2f6df6;
+}
+
+.btn-small-secondary {
+    background: #eef1f5;
+    color: #5f6c7b;
+}
+
+.btn-small-danger {
+    background: #ffe3e3;
+    color: #d63031;
+}
+
+/* OPTIONAL: nice rounded table corners */
+.children-table tr:first-child th:first-child {
+    border-top-left-radius: 15px;
+}
+
+.children-table tr:first-child th:last-child {
+    border-top-right-radius: 15px;
+}

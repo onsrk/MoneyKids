@@ -1,0 +1,38 @@
+/* Auth pages have centered card layout */
+body.auth-page {
+    background: linear-gradient(135deg, #1D4ED8 0%, #3B82F6 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.auth-card {
+    background: white;
+    border-radius: 24px;
+    padding: 40px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.2);
+}
+
+.auth-logo {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.auth-logo-icon { font-size: 52px; display: block; margin-bottom: 10px; }
+.auth-logo-text { font-size: 28px; font-weight: 900; color: #1D4ED8; }
+.auth-logo-sub  { font-size: 13px; color: #64748B; margin-top: 4px; }
+
+.auth-link {
+    text-align: center;
+    font-size: 13px;
+    color: #64748B;
+    margin-top: 20px;
+}
+
+.auth-link a {
+    color: #2563EB;
+    font-weight: 700;
+    text-decoration: none;
+}
