@@ -2,7 +2,7 @@
 session_start();
 require_once $_SERVER['DOCUMENT_ROOT'] . '/MoneyKids/config/db.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/MoneyKids/crud/users/create.php';
-
+require_once $_SERVER['DOCUMENT_ROOT'] . '/MoneyKids/config/layout.php';
 // Check if logged in and is parent
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'parent') {
     header('Location: ../authentification/login.php');
@@ -45,23 +45,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>MoneyKids — Ajouter un enfant</title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/parent.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+</head>
+<body class="bg-gradient-to-b from-orange-100 via-white to-blue-100 min-h-screen">
 
 <!-- NAVBAR -->
-<nav class="navbar">
-    <div class="nav-logo">MoneyKids</div>
-    <div class="nav-right">
-        <span class="nav-user">
-            👤 <?= htmlspecialchars($_SESSION['prenom'] . ' ' . $_SESSION['nom']) ?>
-        </span>
-        <a href="../authentification/logout.php" class="btn-logout">Déconnexion</a>
-    </div>
-</nav>
+<?php renderNavbar(); ?>
 
 <!-- CONTENT -->
-<div class="page-wrapper">
-    <div class="page-title">Ajouter un enfant</div>
+<div class="max-w-5xl mx-auto px-6 pt-32 pb-12 space-y-8">
+    <a href="dashboard.php" class="text-[#0A2A6B] font-semibold hover:underline">
+        ← Retour au dashboard
+    </a>
+    <div class="text-3xl font-bold text-[#0A2A6B]">Ajouter un enfant</div>
     <div class="page-sub">Créez un compte pour votre enfant</div>
 
     <div class="form-card">
@@ -71,61 +69,99 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php endif; ?>
 
         <?php if ($success): ?>
-            <div class="alert-success">
+            <div class="max-w-5xl mx-auto px-6 pt-24 md:pt-28 lg:pt-32 pb-12 space-y-8">
                 <?= htmlspecialchars($success) ?>
                 <br><br>
-                <a href="dashboard.php" class="btn-primary">
-                    ← Retour au dashboard
-                </a>
+                
+    <a href="dashboard.php" class="text-[#0A2A6B] font-semibold hover:underline">
+        ← Retour au dashboard
+    </a>
+
             </div>
         <?php else: ?>
 
-        <form method="POST" action="">
-            <div class="form-row">
-                <div class="form-group">
-                    <label class="form-label">Nom *</label>
-                    <input class="form-input" type="text" name="nom"
-                           placeholder="Ben Ali"
-                           value="<?= htmlspecialchars($_POST['nom'] ?? '') ?>"
-                           required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Prénom *</label>
-                    <input class="form-input" type="text" name="prenom"
-                           placeholder="Lina"
-                           value="<?= htmlspecialchars($_POST['prenom'] ?? '') ?>"
-                           required>
-                </div>
+        <form method="POST" class="space-y-6">
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+
+            <!-- PRENOM -->
+            <div class="relative">
+                <input type="text" name="prenom"
+                    value="<?= htmlspecialchars($_POST['prenom'] ?? '') ?>"
+                    class="peer w-full py-3 bg-transparent border-b-2 border-gray-400 focus:border-blue-800 outline-none"
+                    placeholder=" ">
+                <label class="absolute -top-3 left-0 text-sm font-bold text-gray-500 transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-2 peer-placeholder-shown:font-normal peer-placeholder-shown:text-gray-500 peer-focus:-top-3 peer-focus:text-sm peer-focus:font-bold peer-focus:text-blue-900">
+                    Prénom
+                </label>
             </div>
 
-            <div class="form-group">
-                <label class="form-label">Âge *</label>
-                <input class="form-input" type="number" name="age"
-                       placeholder="8" min="1" max="17"
-                       value="<?= htmlspecialchars($_POST['age'] ?? '') ?>"
-                       required>
+            <!-- NOM -->
+            <div class="relative">
+                <input type="text" name="nom"
+                    value="<?= htmlspecialchars($_POST['nom'] ?? '') ?>"
+                    class="peer w-full py-3 bg-transparent border-b-2 border-gray-400 focus:border-blue-800 outline-none"
+                    placeholder=" ">
+                <label class="absolute -top-3 left-0 text-sm font-bold text-gray-500 transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-2 peer-placeholder-shown:font-normal peer-placeholder-shown:text-gray-500 peer-focus:-top-3 peer-focus:text-sm peer-focus:font-bold peer-focus:text-blue-900">
+                    Nom
+                </label>
             </div>
 
-            <div class="form-group">
-                <label class="form-label">Email (pour connexion) *</label>
-                <input class="form-input" type="email" name="email"
-                       placeholder="lina@moneykids.com"
-                       value="<?= htmlspecialchars($_POST['email'] ?? '') ?>"
-                       required>
+        </div>
+
+        <!-- EMAIL -->
+        <div class="relative">
+            <input type="email" name="email"
+                value="<?= htmlspecialchars($_POST['email'] ?? '') ?>"
+                class="peer w-full py-3 bg-transparent border-b-2 border-gray-400 focus:border-blue-800 outline-none"
+                placeholder=" ">
+            <label class="absolute -top-3 left-0 text-sm font-bold text-gray-500 transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-2 peer-placeholder-shown:font-normal peer-placeholder-shown:text-gray-500 peer-focus:-top-3 peer-focus:text-sm peer-focus:font-bold peer-focus:text-blue-900">
+                Email
+            </label>
+        </div>
+        <div class="relative">
+            <input type="number" name="age"
+                value="<?= htmlspecialchars($_POST['age'] ?? '') ?>"
+                class="peer w-full py-3 bg-transparent border-b-2 border-gray-400 focus:border-blue-800 outline-none"
+                placeholder=" ">
+            <label class="absolute -top-3 left-0 text-sm font-bold text-gray-500 transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-2 peer-placeholder-shown:font-normal peer-placeholder-shown:text-gray-500 peer-focus:-top-3 peer-focus:text-sm peer-focus:font-bold peer-focus:text-blue-900">
+                Age
+            </label>
+        </div>
+
+        <!-- PASSWORD -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+
+            <div class="relative">
+                <input type="password" name="password"
+                    class="peer w-full py-3 bg-transparent border-b-2 border-gray-400 focus:border-blue-800 outline-none"
+                    placeholder=" ">
+                <label class="absolute -top-3 left-0 text-sm font-bold text-gray-500 transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-2 peer-placeholder-shown:font-normal peer-placeholder-shown:text-gray-500 peer-focus:-top-3 peer-focus:text-sm peer-focus:font-bold peer-focus:text-blue-900">
+                    Mot de passe
+                </label>
             </div>
 
-            <div class="form-group">
-                <label class="form-label">Mot de passe *</label>
-                <input class="form-input" type="password"
-                       name="password" placeholder="••••••••" required>
+            <div class="relative">
+                <input type="password" name="confirm"
+                    class="peer w-full py-3 bg-transparent border-b-2 border-gray-400 focus:border-blue-800 outline-none"
+                    placeholder=" ">
+                <label class="absolute -top-3 left-0 text-sm font-bold text-gray-500 transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-2 peer-placeholder-shown:font-normal peer-placeholder-shown:text-gray-500 peer-focus:-top-3 peer-focus:text-sm peer-focus:font-bold peer-focus:text-blue-900">
+                    Confirmer
+                </label>
             </div>
+
+        </div>
+
+        <!-- BUTTON -->
+        
+
+    
 
             <div class="form-actions">
-                <a href="dashboard.php" class="btn-secondary">
-                    ← Annuler
+                <a href="dashboard.php" class="px-6 py-2.5 text-[#0A2A6B] font-semibold border border-[#0A2A6B] rounded-xl hover:bg-[#0A2A6B] hover:text-white transition-all duration-300 hover:scale-105">
+                     Annuler
                 </a>
-                <button type="submit" class="btn-primary">
-                    Créer le compte →
+                <button type="submit" class="w-full py-3 rounded-lg text-white bg-[#0A2A6B] hover:bg-blue-800 transition font-semibold">
+                    Créer le compte 
                 </button>
             </div>
         </form>

@@ -2,6 +2,7 @@
 session_start();
 require_once $_SERVER['DOCUMENT_ROOT'] . '/MoneyKids/config/db.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/MoneyKids/crud/users/read.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/MoneyKids/config/layout.php';
 
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'parent') {
     header('Location: /MoneyKids/authentification/login.php');
@@ -65,26 +66,18 @@ $totaux = $stmt->fetch();
     <title>MoneyKids — Historique</title>
     <link rel="stylesheet" href="/MoneyKids/assets/css/style.css">
     <link rel="stylesheet" href="/MoneyKids/assets/css/parent.css">
+      <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-gradient-to-b from-orange-100 via-white to-blue-100 min-h-screen">
 
-<nav class="navbar">
-    <div class="nav-logo">MoneyKids</div>
-    <div class="nav-right">
-        <span class="nav-user">
-            <?= htmlspecialchars($_SESSION['prenom'] . ' ' . $_SESSION['nom']) ?>
-        </span>
-        <a href="/MoneyKids/authentification/logout.php" class="btn-logout">
-            Deconnexion
-        </a>
-    </div>
-</nav>
+<?php renderNavbar(); ?>
 
-<div class="page-wrapper">
-    <a href="dashboard.php" class="back-link">← Retour au dashboard</a>
-
+<div class="max-w-5xl mx-auto px-6 pt-32 pb-12 space-y-8">
+    <a href="dashboard.php" class="text-[#0A2A6B] font-semibold hover:underline">
+        ← Retour au dashboard
+    </a>
     <div class="page-title">
-        Historique — <?= htmlspecialchars($enfant['prenom'] . ' ' . $enfant['nom']) ?>
+        Historique : <span class="text-orange-500 text-2xl font-bold"> <?= htmlspecialchars($enfant['prenom'] . ' ' . $enfant['nom']) ?></span>
     </div>
     <div class="page-sub">
         Toutes les transactions de <?= htmlspecialchars($enfant['prenom']) ?>
@@ -135,7 +128,7 @@ $totaux = $stmt->fetch();
     <?php else: ?>
         <div class="card" style="padding:0; overflow:hidden;">
             <table class="table">
-                <thead>
+                <thead class="bg-gray-50 text-gray-600">
                     <tr>
                         <th>Description</th>
                         <th>Type</th>

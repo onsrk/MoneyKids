@@ -37,42 +37,110 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="../assets/css/auth.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoneyKids — Connexion</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://kit.fontawesome.com/8368f69198.js" crossorigin="anonymous"></script>
 </head>
-<!-- auth/login.html -->
-<body class="auth-page">
-<div class="auth-card">
-    <div class="auth-logo">
-        <div class="auth-logo-text">MoneyKids</div>
-        <div class="auth-logo-sub">Connectez-vous à votre espace</div>
+
+<body class="min-h-screen bg-gradient-to-b from-orange-100 via-white to-blue-100 flex items-center justify-center p-4">
+
+<div class="w-full max-w-2xl bg-white/40 border border-orange-100 p-8 rounded-xl shadow-lg backdrop-blur-sm space-y-6">
+
+    <!-- LOGO -->
+    <div class="text-center">
+        <span class="text-3xl font-black bg-gradient-to-br from-blue-800 to-orange-500 bg-clip-text text-transparent">
+            MoneyKids
+        </span>
     </div>
 
+    <!-- TITLE -->
+    <div class="text-center space-y-1">
+        <h2 class="text-2xl font-bold text-[#0A2A6B]">
+            Connectez-vous à votre espace
+        </h2>
+        <p class="text-sm text-gray-700">
+            Accédez à votre compte parent
+        </p>
+    </div>
+
+    <!-- ERROR -->
     <?php if (!empty($error)): ?>
-        <div class="alert-error">⚠️ <?= htmlspecialchars($error) ?></div>
+        <div class="text-red-600 font-semibold text-center">
+            <?= htmlspecialchars($error) ?>
+        </div>
     <?php endif; ?>
 
-    <form method="POST" action="">
-        <div class="form-group">
-            <label class="form-label">Email</label>
-            <input class="form-input" type="email" name="email"
-                   placeholder="votre@email.com" required>
+    <!-- FORM -->
+    <form method="POST" class="space-y-6">
+
+        <!-- EMAIL -->
+        <div class="relative">
+            <input
+                type="email"
+                name="email"
+                value="<?= htmlspecialchars($_POST['email'] ?? '') ?>"
+                class="peer w-full py-3 bg-transparent border-b-2 border-gray-400 focus:border-blue-800 outline-none"
+                placeholder=" "
+                required
+            >
+
+            <label class="absolute -top-3 left-0 text-sm font-bold text-gray-500 transition-all
+                peer-placeholder-shown:text-base
+                peer-placeholder-shown:top-2
+                peer-placeholder-shown:font-normal
+                peer-placeholder-shown:text-gray-500
+                peer-focus:-top-3
+                peer-focus:text-sm
+                peer-focus:font-bold
+                peer-focus:text-blue-900">
+                Email
+            </label>
         </div>
-        <div class="form-group">
-            <label class="form-label">Mot de passe</label>
-            <input class="form-input" type="password"
-                   name="password" placeholder="••••••••" required>
+
+        <!-- PASSWORD -->
+        <div class="relative">
+            <input
+                type="password"
+                name="password"
+                class="peer w-full py-3 bg-transparent border-b-2 border-gray-400 focus:border-blue-800 outline-none"
+                placeholder=" "
+                required
+            >
+
+            <label class="absolute -top-3 left-0 text-sm font-bold text-gray-500 transition-all
+                peer-placeholder-shown:text-base
+                peer-placeholder-shown:top-2
+                peer-placeholder-shown:font-normal
+                peer-placeholder-shown:text-gray-500
+                peer-focus:-top-3
+                peer-focus:text-sm
+                peer-focus:font-bold
+                peer-focus:text-blue-900">
+                Mot de passe
+            </label>
         </div>
-        <button type="submit" class="btn-primary" style="width:100%">
-            Se connecter →
+
+        <!-- BUTTON -->
+        <button class="w-full py-3 rounded-lg text-white bg-[#0A2A6B] hover:bg-blue-800 transition font-semibold">
+            Se connecter
         </button>
+
     </form>
 
-    <div class="auth-link">
+    <!-- LINK -->
+    <div class="text-center text-sm">
         Pas encore de compte ?
-        <a href="registre.php">S'inscrire</a>
+        <a href="registre.php" class="text-blue-700 font-semibold">
+            S'inscrire
+        </a>
     </div>
+
 </div>
+
 </body>
+</html>

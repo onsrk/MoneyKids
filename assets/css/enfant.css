@@ -328,3 +328,17 @@
 .badge-popup-icon { font-size: 52px; margin-bottom: 10px; }
 .badge-popup-title { font-size: 22px; font-weight: 900; margin-bottom: 8px; }
 .badge-popup-desc { font-size: 14px; opacity: 0.9; }
+ body { font-family: 'Nunito', sans-serif; }
+
+        .bubble {
+            position: absolute;
+            border-radius: 9999px;
+            opacity: 0.2;
+            filter: blur(2px);
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%,100% { transform: translateY(0px); }
+            50% { transform: translateY(-18px); }
+        }

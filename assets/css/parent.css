@@ -315,18 +315,7 @@
     font-family: 'Segoe UI', sans-serif;
 }
 
-/* HEADER */
-.children-table thead {
-    background: #e9edf5;
-}
 
-.children-table th {
-    text-align: left;
-    padding: 15px;
-    font-size: 14px;
-    color: #5a6b8a;
-    font-weight: 600;
-}
 
 /* ROWS */
 .children-table td {

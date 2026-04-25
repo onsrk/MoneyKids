@@ -5,7 +5,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/MoneyKids/crud/users/read.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/MoneyKids/crud/comptes/update.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/MoneyKids/crud/comptes/read.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/MoneyKids/crud/transactions/create.php';
-
+require_once $_SERVER['DOCUMENT_ROOT'] . '/MoneyKids/config/layout.php';
 // Check if logged in and is parent
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'parent') {
     header('Location: ../authentification/login.php');
@@ -68,125 +68,155 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MoneyKids — Argent de poche</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="../assets/css/parent.css">
 </head>
-<body>
 
-<!-- NAVBAR -->
-<nav class="navbar">
-    <div class="nav-logo">MoneyKids</div>
-    <div class="nav-right">
-        <span class="nav-user">
-             <?= htmlspecialchars($_SESSION['prenom'] . ' ' . $_SESSION['nom']) ?>
-        </span>
-        <a href="../authentification/logout.php" class="btn-logout">Déconnexion</a>
-    </div>
-</nav>
+<body class="min-h-screen bg-gradient-to-b from-orange-100 via-white to-blue-100">
 
-<!-- CONTENT -->
-<div class="page-wrapper">
-    <a href="dashboard.php" class="back-link">← Retour au dashboard</a>
+<?php renderNavbar(); ?>
 
-    <div class="page-title">
-         Argent de poche — <?= htmlspecialchars($enfant['prenom']) ?>
-    </div>
-    <div class="page-sub">
-        Gérez l'argent de poche de <?= htmlspecialchars($enfant['prenom']) ?>
-    </div>
+<div class="max-w-5xl mx-auto px-6 pt-32 pb-12 space-y-8">
 
-    <!-- CURRENT BALANCE CARD -->
-    <div class="balance-card">
-        <div class="balance-left">
-            <div class="balance-avatar">
+    <!-- BACK -->
+    <a href="dashboard.php" class="text-[#0A2A6B] font-semibold hover:underline">
+        ← Retour au dashboard
+    </a>
+
+    <!-- HEADER -->
+    
+
+    <!-- BALANCE CARD -->
+    <div class="bg-white/70 backdrop-blur-sm border border-white/50 rounded-2xl shadow-lg p-8 flex justify-between items-center">
+
+        <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-full bg-[#0A2A6B] text-white flex items-center justify-center font-bold">
                 <?= strtoupper(substr($enfant['prenom'], 0, 1)) ?>
             </div>
+
             <div>
-                <div class="balance-name">
+                <div class="font-bold text-gray-800">
                     <?= htmlspecialchars($enfant['prenom'] . ' ' . $enfant['nom']) ?>
                 </div>
-                <div class="balance-age">
+                <div class="text-gray-500 text-sm">
                     <?= $enfant['age'] ? $enfant['age'] . ' ans' : '' ?>
                 </div>
             </div>
         </div>
-        <div class="balance-right">
-            <div class="balance-label">Solde actuel</div>
-            <div class="balance-amount">
-                <?= number_format($compte['solde'], 2) ?> TND
+
+        <div class="text-right">
+            <div class="text-sm text-gray-500">Solde actuel</div>
+            <div class="text-3xl font-bold text-[#0A2A6B]">
+                <?= number_format($compte['solde'], 2) ?> <span class="text-orange-500 text-lg">TND</span>
             </div>
-            <div class="balance-pocket">
-                Argent de poche : 
-                <?= number_format($compte['montant_argent_poche'], 2) ?> TND
-                / <?= $compte['frequence'] ?>
+            <div class="text-sm text-gray-600 mt-1">
+                Poche : <?= number_format($compte['montant_argent_poche'], 2) ?> TND / <?= $compte['frequence'] ?>
             </div>
         </div>
+
     </div>
 
     <!-- FORM -->
-    <div class="form-card" style="margin-top: 24px;">
-        <h3 style="font-size:18px; font-weight:800; 
-                   color:#1e293b; margin-bottom:20px;">
+    <div class="bg-white/70 backdrop-blur-sm border border-white/50 rounded-2xl shadow-lg p-8">
+
+        <h2 class="text-xl font-bold text-[#0A2A6B] mb-6">
             Attribuer de l'argent de poche
-        </h3>
+        </h2>
 
         <?php if ($error): ?>
-            <div class="alert-error"> <?= htmlspecialchars($error) ?></div>
+            <div class="text-red-600 font-semibold mb-4">
+                <?= htmlspecialchars($error) ?>
+            </div>
         <?php endif; ?>
 
         <?php if ($success): ?>
-            <div class="alert-success"> <?= htmlspecialchars($success) ?></div>
+            <div class="text-green-600 font-semibold mb-4">
+                <?= htmlspecialchars($success) ?>
+            </div>
         <?php endif; ?>
 
-        <form method="POST" action="">
-            <div class="form-group">
-                <label class="form-label">Montant (TND) *</label>
-                <input class="form-input" type="number"
-                       name="montant" placeholder="20.00"
-                       min="0.01" step="0.01"
-                       value="<?= htmlspecialchars($_POST['montant'] ?? '') ?>"
-                       required>
+        <form method="POST" class="space-y-10">
+
+            <!-- MONTANT -->
+            <div class="relative">
+                <input
+                    type="number"
+                    name="montant"
+                    min="0.01"
+                    step="0.01"
+                    value="<?= htmlspecialchars($_POST['montant'] ?? '') ?>"
+                    class="peer w-full py-3 bg-transparent border-b-2 border-gray-400 focus:border-blue-800 outline-none"
+                    placeholder=" "
+                    required
+                >
+                <label class="absolute left-0 -top-3 text-sm font-bold text-gray-500 transition-all
+                    peer-placeholder-shown:top-2
+                    peer-placeholder-shown:text-base
+                    peer-placeholder-shown:font-normal
+                    peer-focus:-top-3
+                    peer-focus:text-sm
+                    peer-focus:font-bold
+                    peer-focus:text-blue-900">
+                    Montant (TND)
+                </label>
             </div>
 
-            <div class="form-group">
-                <label class="form-label">Fréquence *</label>
-                <select class="form-input" name="frequence" required>
-                    <option value="">-- Choisir --</option>
-                    <option value="hebdo" 
-                        <?= ($_POST['frequence'] ?? '') === 'hebdo' ? 'selected' : '' ?>>
-                        Hebdomadaire
-                    </option>
-                    <option value="mensuel"
-                        <?= ($_POST['frequence'] ?? '') === 'mensuel' ? 'selected' : '' ?>>
-                        Mensuel
-                    </option>
-                </select>
-            </div>
+            <!-- FREQUENCE -->
+            <div class="relative pt-2">
+    
+    <select
+        name="frequence"
+        class="peer w-full py-3 bg-transparent border-b-2 border-gray-400 focus:border-blue-800 outline-none"
+        required
+    >
+        <option value=""></option>
+        <option value="hebdo" <?= ($_POST['frequence'] ?? '') === 'hebdo' ? 'selected' : '' ?>>
+            Hebdomadaire
+        </option>
+        <option value="mensuel" <?= ($_POST['frequence'] ?? '') === 'mensuel' ? 'selected' : '' ?>>
+            Mensuel
+        </option>
+    </select>
 
-            <div class="form-actions">
-                <a href="dashboard.php" class="btn-secondary">Annuler</a>
-                <button type="submit" class="btn-primary">
-                    Attribuer →
-                </button>
-            </div>
-        </form>
-    </div>
+    <label class="absolute left-0 -top-4 text-sm font-bold text-gray-500 transition-all
+        peer-focus:-top-4
+        peer-focus:text-blue-900">
+        Fréquence
+    </label>
+
 </div>
 
-<div style="margin-top: 16px; text-align: right;">
-    <a href="delete_argent_poche.php?id=<?= $enfant_id ?>"
-       class="btn-danger"
-       onclick="return confirm('Reinitialiser l argent de poche de <?= htmlspecialchars($enfant['prenom']) ?> a 0 TND ?')">
-        Reinitialiser argent de poche
-    </a>
+            <!-- BUTTONS -->
+            <div class="flex gap-4">
+
+                <a href="dashboard.php"
+                   class="px-6 py-3 rounded-xl border border-[#0A2A6B] text-[#0A2A6B] font-semibold hover:bg-[#0A2A6B] hover:text-white transition">
+                    Annuler
+                </a>
+
+                <button
+                    type="submit"
+                    class="px-6 py-3 rounded-xl bg-[#0A2A6B] text-white font-semibold hover:bg-blue-800 transition">
+                    Attribuer →
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+    <!-- RESET -->
+    <div class="text-right">
+        <a href="delete_argent_poche.php?id=<?= $enfant_id ?>"
+           onclick="return confirm('Réinitialiser l argent de poche ?')"
+           class="px-4 py-2 bg-red-500 text-white rounded-xl hover:bg-red-600 transition">
+            Réinitialiser argent de poche
+        </a>
+    </div>
+
 </div>
 
 </body>
-<script>
-document.addEventListener('wheel', function(e) {
-    if (document.activeElement.type === 'number') {
-        document.activeElement.blur();
-    }
-});
-</script>
 </html>

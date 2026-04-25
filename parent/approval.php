@@ -2,6 +2,7 @@
 session_start();
 require_once $_SERVER['DOCUMENT_ROOT'] . '/MoneyKids/config/db.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/MoneyKids/crud/transactions/update.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/MoneyKids/config/layout.php';
 
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'parent') {
     header('Location: ../authentification/login.php');
@@ -45,83 +46,17 @@ $pending_requests = getPendingTransactionsByParent($pdo, $parent_id);
     <title>MoneyKids - Approbation des depenses</title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/parent.css">
-    <style>
-        .request-card {
-            background: white;
-            border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            border-left: 5px solid #F59E0B;
-        }
-        .request-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-        .enfant-name {
-            font-size: 18px;
-            font-weight: 800;
-            color: #1e293b;
-        }
-        .request-montant {
-            font-size: 24px;
-            font-weight: 900;
-            color: #DC2626;
-        }
-        .request-details {
-            color: #64748B;
-            margin-bottom: 15px;
-            padding: 10px;
-            background: #F8FAFC;
-            border-radius: 12px;
-        }
-        .btn-approve {
-            background: #10B981;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 12px;
-            font-weight: 800;
-            cursor: pointer;
-        }
-        .btn-decline {
-            background: #EF4444;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 12px;
-            font-weight: 800;
-            cursor: pointer;
-        }
-        .motif-input {
-            flex: 1;
-            padding: 8px 12px;
-            border: 1px solid #e2e8f0;
-            border-radius: 10px;
-            font-family: 'Nunito', sans-serif;
-        }
-        .empty-state {
-            text-align: center;
-            padding: 60px;
-            background: white;
-            border-radius: 20px;
-        }
-    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-gradient-to-b from-orange-100 via-white to-blue-100 min-h-screen">
 
-<nav class="navbar">
-    <div class="nav-logo">MoneyKids</div>
-    <div class="nav-right">
-        <span class="nav-user"><?= htmlspecialchars($_SESSION['prenom'] . ' ' . $_SESSION['nom']) ?></span>
-        <a href="../authentification/logout.php" class="btn-logout">Deconnexion</a>
-    </div>
-</nav>
+<?php renderNavbar(); ?>
 
-<div class="page-wrapper">
-    <div class="page-title">Approbation des depenses</div>
+<div class="max-w-5xl mx-auto px-6 pt-32 pb-12 space-y-8">
+    <a href="dashboard.php" class="text-[#0A2A6B] font-semibold hover:underline">
+        ← Retour au dashboard
+    </a>
+    <div class="text-3xl font-bold text-[#0A2A6B]">Approbation des depenses</div>
     <div class="page-sub">Approuvez ou refusez les demandes de vos enfants</div>
 
     <?php if ($error): ?>
@@ -139,51 +74,75 @@ $pending_requests = getPendingTransactionsByParent($pdo, $parent_id);
             <div style="color: #64748B; margin-top: 8px;">Les demandes de vos enfants apparaitront ici</div>
         </div>
     <?php else: ?>
-        <div style="margin-bottom: 20px; background: #EFF6FF; padding: 12px; border-radius: 12px;">
-            <strong><?= count($pending_requests) ?></strong> demande(s) en attente d'approbation
+
+<!-- HEADER -->
+<div class="bg-white/60 backdrop-blur-sm border border-white/50 rounded-2xl shadow p-4 mb-6">
+    <p class="text-[#0A2A6B] font-bold">
+        <?= count($pending_requests) ?> demande(s) en attente d'approbation
+    </p>
+</div>
+
+<!-- REQUESTS -->
+<div class="space-y-6">
+
+<?php foreach ($pending_requests as $request): ?>
+
+    <div class="bg-white/70 backdrop-blur-sm border border-white/50 rounded-2xl shadow p-6 space-y-4">
+
+        <!-- TOP -->
+        <div class="flex justify-between items-center">
+            <div class="font-bold text-[#0A2A6B]">
+                <?= htmlspecialchars($request['prenom'] . ' ' . $request['nom']) ?>
+            </div>
+
+            <div class="text-orange-500 font-bold">
+                <?= number_format($request['montant'], 2) ?> TND
+            </div>
         </div>
 
-        <?php foreach ($pending_requests as $request): ?>
-            <div class="request-card">
-                <div class="request-header">
-                    <div class="enfant-name">
-                        <?= htmlspecialchars($request['prenom'] . ' ' . $request['nom']) ?>
-                    </div>
-                    <div class="request-montant">
-                        <?= number_format($request['montant'], 2) ?> TND
-                    </div>
-                </div>
+        <!-- DETAILS -->
+        <div class="text-sm text-gray-600 space-y-1">
+            <p>Description: <?= htmlspecialchars($request['description']) ?></p>
+            <p>Soumis le: <?= date('d/m/Y H:i', strtotime($request['date_soumission'])) ?></p>
+            <p>Solde actuel: <?= number_format($request['solde'], 2) ?> TND</p>
+        </div>
 
-                <div class="request-details">
-                    <div>Description: <?= htmlspecialchars($request['description']) ?></div>
-                    <div>Soumis le: <?= date('d/m/Y H:i', strtotime($request['date_soumission'])) ?></div>
-                    <div>Solde actuel: <?= number_format($request['solde'], 2) ?> TND</div>
-                </div>
+        <!-- FORM ACTIONS -->
+        <form method="POST" class="flex flex-col sm:flex-row gap-3 sm:items-center">
 
-                <form method="POST" action="" style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
-                    <input type="hidden" name="transaction_id" value="<?= $request['id'] ?>">
-                    
-                    <input type="text" 
-                           name="motif_refus" 
-                           class="motif-input" 
-                           placeholder="Motif du refus (optionnel)"
-                           style="flex: 1;">
+            <input type="hidden" name="transaction_id" value="<?= $request['id'] ?>">
 
-                    <button type="submit" name="action" value="approve" class="btn-approve">
-                        Approuver
-                    </button>
-                    <button type="submit" name="action" value="decline" class="btn-decline" 
-                            onclick="return confirm('Confirmer le refus de cette depense ?')">
-                        Refuser
-                    </button>
-                </form>
-            </div>
-        <?php endforeach; ?>
-    <?php endif; ?>
+            <input type="text"
+                   name="motif_refus"
+                   placeholder="Motif du refus (optionnel)"
+                   class="flex-1 px-4 py-2 border-b-2 border-gray-300 focus:border-blue-800 outline-none bg-transparent">
 
-    <div style="margin-top: 30px;">
-        <a href="dashboard.php" class="btn-secondary">Retour au dashboard</a>
+            <button type="submit"
+                    name="action"
+                    value="approve"
+                    class="px-5 py-2 rounded-xl bg-[#0A2A6B] text-white font-semibold hover:bg-blue-800 transition">
+                Approuver
+            </button>
+
+            <button type="submit"
+                    name="action"
+                    value="decline"
+                    onclick="return confirm('Confirmer le refus ?')"
+                    class="px-5 py-2 rounded-xl bg-red-500 text-white font-semibold hover:bg-red-600 transition">
+                Refuser
+            </button>
+
+        </form>
+
     </div>
+
+<?php endforeach; ?>
+
+</div>
+
+<?php endif; ?>
+
+    
 </div>
 
 </body>
