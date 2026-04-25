@@ -46,7 +46,7 @@ $transactions = getTransactionsByUser($pdo, $user_id);
                 Bonjour <?= htmlspecialchars($prenom) ?> !
             </div>
             <div class="welcome-sub">
-                Voici un apercu de tes finances
+                Voici un apercu complet de tes finances
             </div>
         </div>
     </div>
@@ -88,26 +88,33 @@ $transactions = getTransactionsByUser($pdo, $user_id);
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($transactions as $tx): ?>
-                        <tr>
-                            <td>
-                                <?= htmlspecialchars($tx['description']) ?>
-                            </td>
-                            <td>
-                                <span class="badge <?= $tx['type'] === 'credit' ? 'badge-green' : 'badge-red' ?>">
-                                    <?= $tx['type'] === 'credit' ? 'Credit' : 'Debit' ?>
-                                </span>
-                            </td>
-                            <td class="<?= $tx['type'] === 'credit' ? 'amount-credit' : 'amount-debit' ?>">
-                                <?= $tx['type'] === 'credit' ? '+' : '-' ?>
-                                <?= number_format($tx['montant'], 2) ?> TND
-                            </td>
-                            <td>
-                                <?= date('d/m/Y H:i', strtotime($tx['date_transaction'])) ?>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
+    <?php foreach ($transactions as $tx): ?>
+        <tr>
+            <td><?= htmlspecialchars($tx['description']) ?></td>
+            <td>
+                <span class="badge <?= $tx['type'] === 'credit' ? 'badge-green' : 'badge-red' ?>">
+                    <?= $tx['type'] === 'credit' ? 'Credit' : 'Debit' ?>
+                </span>
+            </td>
+            <td class="<?= $tx['type'] === 'credit' ? 'amount-credit' : 'amount-debit' ?>">
+                <?= $tx['type'] === 'credit' ? '+' : '-' ?>
+                <?= number_format($tx['montant'], 2) ?> TND
+            </td>
+            <td>
+                <?= date('d/m/Y H:i', strtotime($tx['date_transaction'])) ?>
+            </td>
+            <td>
+                <?php if ($tx['type'] === 'debit'): ?>
+                <a href="delete_depense.php?id=<?= $tx['id'] ?>"
+                   class="btn-small-danger"
+                   onclick="return confirm('Supprimer cette depense ? Le montant sera restitue.')">
+                    Supprimer
+                </a>
+                <?php endif; ?>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</tbody>
             </table>
         </div>
     <?php endif; ?>
