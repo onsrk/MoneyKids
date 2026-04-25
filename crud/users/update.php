@@ -21,7 +21,7 @@ function updateEnfant($pdo, $enfant_id, $nom, $prenom, $age) {
 function resetArgentPoche($pdo, $user_id) {
     $stmt = $pdo->prepare("
         UPDATE compte 
-        SET montant_argent_poche = 0.00, frequence = 'mensuel'
+        SET montant_argent_poche = 0.00, solde = 0.00, frequence = 'mensuel'
         WHERE user_id = ?
     ");
     $stmt->execute([$user_id]);

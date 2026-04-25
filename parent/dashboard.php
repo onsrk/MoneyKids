@@ -131,7 +131,9 @@ $prenom    = $_SESSION['prenom'];
 <a href="add_child.php" class="btn-add-child">
     + Ajouter un enfant
 </a>
-
+<a href="approval.php" class="btn-primary" style="background: #F59E0B; margin-left: 10px;">
+    Approuver depenses
+</a>
 <?php if ($deleted): ?>
     <div class="alert-success" id="delete-msg">
         Compte enfant supprime avec succes !

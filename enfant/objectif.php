@@ -237,5 +237,11 @@ if (msg) {
         }, 500);
     }, 3000); 
 }
+
+document.addEventListener('wheel', function(e) {
+    if (document.activeElement.type === 'number') {
+        document.activeElement.blur();
+    }
+});
 </script>
 </html>

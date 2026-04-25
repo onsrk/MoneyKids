@@ -135,4 +135,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 
 </body>
+<script>
+document.addEventListener('wheel', function(e) {
+    if (document.activeElement.type === 'number') {
+        document.activeElement.blur();
+    }
+});
+</script>
 </html>

@@ -42,6 +42,23 @@ createTransaction(
     'debit',
     'Epargne — ' . $objectif['nom']
 );
+// Update objectif montant_actuel
+updateMontantActuel($pdo, $objectif_id, $montant);
+// Check if objectif is now reached → give badge
+require_once $_SERVER['DOCUMENT_ROOT'] . '/MoneyKids/crud/recompenses/create.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/MoneyKids/crud/objectifs/read.php';
+
+$objectif_updated = getObjectifById($pdo, $objectif_id);
+if ($objectif_updated['montant_actuel'] >= $objectif_updated['montant_cible']) {
+    createRecompense(
+        $pdo,
+        $user_id,
+        'Super Epargnant',
+        'Objectif « ' . $objectif_updated['nom'] . ' » atteint !'
+    );
+    header('Location: recompenses.php?badge=1');
+    exit();
+}
 
 header('Location: objectif.php?success=epargne_ok');
 exit();

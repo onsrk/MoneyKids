@@ -409,3 +409,67 @@
 .children-table tr:first-child th:last-child {
     border-top-right-radius: 15px;
 }
+
+        .request-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-left: 5px solid #F59E0B;
+        }
+        .request-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .enfant-name {
+            font-size: 18px;
+            font-weight: 800;
+            color: #1e293b;
+        }
+        .request-montant {
+            font-size: 24px;
+            font-weight: 900;
+            color: #DC2626;
+        }
+        .request-details {
+            color: #64748B;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #F8FAFC;
+            border-radius: 12px;
+        }
+        .btn-approve {
+            background: #10B981;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+        .btn-decline {
+            background: #EF4444;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+        .motif-input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            font-family: 'Nunito', sans-serif;
+        }
+        .empty-state {
+            text-align: center;
+            padding: 60px;
+            background: white;
+            border-radius: 20px;
+        }
+  
