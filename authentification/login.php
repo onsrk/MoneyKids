@@ -135,9 +135,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- LINK -->
     <div class="text-center text-sm">
         Pas encore de compte ?
-        <a href="registre.php" class="text-blue-700 font-semibold">
-            S'inscrire
-        </a>
+        <a href="/MoneyKids/authentification/registre.php" class="text-blue-700 font-semibold">
+    S'inscrire
+</a>
     </div>
 
 </div>

@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 require_once '../config/db.php';
@@ -6,8 +7,9 @@ require_once '../crud/users/create.php';
 // If already logged in → redirect
 if (isset($_SESSION['user_id'])) {
     
-    header('Location: login.php');
-    exit();
+    
+header('Location: /MoneyKids/authentification/login.php');
+exit();
 }
 
 $error = '';
@@ -144,7 +146,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- LINK -->
     <div class="text-center text-sm">
         Déjà un compte ?
-        <a href="login.php" class="text-blue-700 font-semibold">Se connecter</a>
+        <a href="/MoneyKids/authentification/login.php" class="text-blue-700 font-semibold">
+    Se connecter
+</a>
     </div>
 
 </div>

@@ -16,7 +16,6 @@ $new_badge    = $_GET['badge'] ?? '';
 // All possible badges
 $all_badges = [
     ['badge' => 'Super Epargnant',    'icon' => '🥇', 'desc' => 'Atteindre un objectif d epargne'],
-    ['badge' => 'Premier Pas',         'icon' => '👣', 'desc' => 'Premiere depense enregistree'],
     ['badge' => 'Planificateur',       'icon' => '📋', 'desc' => 'Creer 3 objectifs d epargne'],
     ['badge' => 'Economiste',          'icon' => '💡', 'desc' => 'Epargner plus de 50 TND au total'],
 ];
@@ -96,6 +95,59 @@ $earned_badges = array_column($recompenses, 'badge');
 
     <!-- POPUP -->
     <?php if ($new_badge): ?>
+         <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <script>
+    window.onload = function () {
+
+        const duration = 3 * 1000;
+        const animationEnd = Date.now() + duration;
+
+        const defaults = {
+            startVelocity: 30,
+            spread: 360,
+            ticks: 60,
+            zIndex: 999
+        };
+
+        function randomInRange(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        const interval = setInterval(function () {
+            const timeLeft = animationEnd - Date.now();
+
+            if (timeLeft <= 0) {
+                clearInterval(interval);
+                return;
+            }
+
+            const particleCount = 50 * (timeLeft / duration);
+
+            // Left side
+            confetti({
+                ...defaults,
+                particleCount,
+                origin: {
+                    x: randomInRange(0.1, 0.3),
+                    y: Math.random() - 0.2
+                }
+            });
+
+            // Right side
+            confetti({
+                ...defaults,
+                particleCount,
+                origin: {
+                    x: randomInRange(0.7, 0.9),
+                    y: Math.random() - 0.2
+                }
+            });
+
+        }, 250);
+    };
+    </script>
+
         <div id="badge-popup"
              class="bg-yellow-50 border border-yellow-200 text-yellow-700 font-bold px-5 py-4 rounded-2xl shadow-md">
 

@@ -193,6 +193,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             Supprimer
                         </a>
                     </div>
+                    <?php if ($progression < 100): ?>
+<form method="POST" action="epargner.php" class="flex gap-2 mt-3">
+    <input type="hidden" name="objectif_id" value="<?= $obj['id'] ?>">
+    <input type="number"
+           name="montant_epargne"
+           placeholder="Montant a epargner"
+           min="0.01" step="0.01"
+           class="flex-1 p-3 rounded-xl border focus:ring-4 focus:ring-green-200 outline-none text-sm">
+    <button type="submit"
+            class="px-5 py-3 bg-gradient-to-r from-green-500 to-cyan-500 text-white font-bold rounded-xl hover:scale-105 transition text-sm">
+        Epargner
+    </button>
+</form>
+<?php endif; ?>
 
                 </div>
 

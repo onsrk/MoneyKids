@@ -18,7 +18,9 @@
     --white:         #ffffff;
     --shadow:        0 4px 20px rgba(0,0,0,0.08);
 }
-
+html {
+    scroll-behavior: smooth;
+}
 /* ── BASE ── */
 body {
     font-family: 'Nunito', sans-serif;
